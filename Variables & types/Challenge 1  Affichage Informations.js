@@ -1,0 +1,12 @@
+let nom = "bilal";
+let prénom = "esanhaji";
+let àge = 20;
+let sexe = "homme";
+let adresse = "eljadida";
+let e_mail = "bilalsenhaji88@gmail.com";
+console.log(nom);
+console.log(prénom);
+console.log(àge);
+console.log(sexe);
+console.log(adresse);
+console.log(e_mail);
