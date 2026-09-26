@@ -112,50 +112,50 @@ main();
 
 
 
+function ajouterCandidat() { 
+ 
+    let cin = prompt("Veuillez saisir le numéro d'identification national CIN : "); 
+ 
+    while (verification(cin) == true) { 
+        console.log("Le candidat existe déjà."); 
+        cin = prompt("Veuillez saisir un autre CIN : "); 
+    } 
+ 
+    let candidat = { 
+        cin: cin, 
+        nom: prompt("Veuillez saisir le nom du candidat : "), 
+        prenom: prompt("Veuillez saisir le prénom du candidat : "), 
+        partiPolitique: prompt("Veuillez saisir le parti politique du candidat : "), 
+        age: Number(prompt("Veuillez saisir l'âge du candidat : ")), 
+        electeurs: [] 
+    }; 
 
-function ajouterCandidat() {
-
-    let candidat = {
-        cin: prompt("Veuillez saisir le numéro d'identification national CIN : "),
-        nom: prompt("Veuillez saisir le nom du candidat : "),
-        prenom: prompt("Veuillez saisir le prénom du candidat : "),
-        partiPolitique: prompt("Veuillez saisir le parti politique du candidat : "),
-        age: Number(prompt("Veuillez saisir l'âge du candidat : ")),
-        electeurs: []
-    };
-
-    if (verification(candidat.cin)) {
-
-        console.log("Le candidat existe déjà.");
-
-        return;
+    if (candidat.age < 18) {
+        console.log("Le candidat doit avoir 18 ans ou plus.");
+    
     }
 
-    candidats[candidats.length] = candidat;
-
-    console.log("Le candidat a été ajouté avec succès.");
+   
+    candidats.push(candidat); 
+    console.log("Le candidat a été ajouté avec succès. ");
+     
+} 
+ 
+function verification(cin) { 
+ 
+    for (let i = 0; i < candidats.length; i++) { 
+ 
+        if (candidats[i].cin == cin) { 
+            return true; 
+        } 
+      
+    } 
+    return false; 
 }
-
-
-function verification(cin) {
-
-    for (let i = 0; i < candidats.length; i++) {
-
-        if (candidats[i].cin == cin) {
-
-            return true;
-        }
-    }
-
-    return false;
-}
-
 
 function ajouterPlusieursCandidats() {
 
-    let n = Number(
-        prompt("Veuillez indiquer le nombre de candidats que vous souhaitez inclure : ")
-    );
+    let n = Number(prompt("Veuillez indiquer le nombre de candidats que vous souhaitez inclure : "));
 
     for (let i = 0; i < n; i++) {
 
@@ -169,7 +169,7 @@ function afficherListeCandidats() {
     console.log("(1)------> Afficher tous les candidats");
     console.log("(2)------> Trier par nombre de votes");
     console.log("(3)------> Filtrer par parti politique");
-    console.log("(#)------> retour a  Menu principal ")
+    console.log("(#)------> retour a  Menu principal........")
 
 
     let choix = prompt("Votre choix : ");
@@ -338,8 +338,9 @@ function modifierCandidat() {
             console.log("Parti politique :", candidats[i].partiPolitique);
             console.log("Age :", candidats[i].age);
 
-            console.log("1. Modifier le parti politique");
-            console.log("2. Modifier l'âge");
+            console.log("(1)-----> Modifier le parti politique");
+            console.log("(2)-----> Modifier l'âge");
+            console.log("(#)----->retour a  Menu principal.........")
 
             let choix = prompt("Votre choix : ");
 
@@ -354,7 +355,9 @@ function modifierCandidat() {
                 candidats[i].age =Number(prompt("Entrez le nouvel âge : "));
 
                 console.log("Modification effectuée.");
-
+            
+            }else if(choix === "#"){
+                main();
             } else {
 
                 console.log("Choix invalide.");
@@ -435,10 +438,11 @@ function rechercherCandidat() {
 
 function statistiquesElections() {
 
-    console.log("1. Nombre total de candidats");
-    console.log("2. Nombre total de votes");
-    console.log("3. Top 3 candidats");
-    console.log("4. Nombre de candidats par parti");
+    console.log("(1)----> Nombre total de candidats");
+    console.log("(2)---->Nombre total de votes");
+    console.log("(3)---->Top 3 candidats");
+    console.log("(4)---->Nombre de candidats par parti");
+    console.log("(#)---->retour a  Menu principal............")
 
     let choix = prompt("Votre choix : ");
 
