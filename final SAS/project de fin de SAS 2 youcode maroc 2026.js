@@ -1,5 +1,20 @@
 const prompt = require('prompt-sync')();
 
+
+const reset = "\x1b[0m";
+const red = "\x1b[31m";
+const green = "\x1b[32m";
+const yellow = "\x1b[33m";
+const blue = "\x1b[34m";
+const magenta = "\x1b[35m";
+const cyan = "\x1b[36m";
+const white = "\x1b[37m";
+const bold = "\x1b[1m";
+const bgBlue = "\x1b[44m";
+const bgGreen = "\x1b[42m";
+const bgRed = "\x1b[41m";
+const bgCyan = "\x1b[46m";
+
 let candidats = [
     {
         cin: "AB123456",
@@ -32,15 +47,14 @@ let candidats = [
         partiPolitique: "pps",
         age: 60,
         electeurs: []
-    }
-    ,{
+    },
+    {
         cin: "AM453267",
         nom: "bilal",
         prenom: "essanhaji",
         partiPolitique: "ind",
         age: 21,
         electeurs: []
-
     }
 ];
 
@@ -48,22 +62,23 @@ let candidats = [
 let choix;
 function main(){do {
 
-    console.log(`
+    console.log(cyan + bold + `
 ========================================
  GESTION DES ÉLECTIONS - MENU PRINCIPAL
-========================================
-1. Ajouter un nouveau candidat
-2. Ajouter plusieurs candidats à la fois
-3. Afficher la liste des candidats
-4. Voter pour un candidat
-5. Modifier les informations d'un candidat
-6. Supprimer un candidat
-7. Rechercher un candidat par nom
-8. Afficher les statistiques de l'élection
-9. Quitter
-========================================`);
+========================================` + reset);
 
-    choix = prompt("Votre choix ?: ");
+    console.log(yellow + "1. Ajouter un nouveau candidat" + reset);
+    console.log(yellow + "2. Ajouter plusieurs candidats à la fois" + reset);
+    console.log(yellow + "3. Afficher la liste des candidats" + reset);
+    console.log(yellow + "4. Voter pour un candidat" + reset);
+    console.log(yellow + "5. Modifier les informations d'un candidat" + reset);
+    console.log(yellow + "6. Supprimer un candidat" + reset);
+    console.log(yellow + "7. Rechercher un candidat par nom" + reset);
+    console.log(yellow + "8. Afficher les statistiques de l'élection" + reset);
+    console.log(red + "9. Quitter" + reset);
+    console.log(cyan + "========================================" + reset);
+
+    choix = prompt(blue + bold + "Votre choix ?: " + reset);
 
     switch (choix) {
 
@@ -100,11 +115,11 @@ function main(){do {
             break;
 
         case "9":
-            console.log("Au revoir !");
+            console.log(green + "Au revoir !" + reset);
             break;
 
         default:
-            console.log("Choix invalide, réessayez.");
+            console.log(red + "Choix invalide, réessayez." + reset);
     }
 
 } while (choix !== "9");}
@@ -114,36 +129,37 @@ main();
 
 function ajouterCandidat() { 
  
-    let cin = prompt("Veuillez saisir le numéro d'identification national CIN : "); 
+    let cin = prompt(cyan + "Veuillez saisir le numéro d'identification national CIN : " + reset); 
  
     while (verification(cin) == true) { 
-        console.log("Le candidat existe déjà."); 
-        cin = prompt("Veuillez saisir un autre CIN : "); 
+        console.log(red + "Le candidat existe déjà." + reset); 
+        cin = prompt(cyan + "Veuillez saisir un autre CIN : " + reset); 
     } 
+
     while(cin==""){
-        console.log("L'utilisation de l'aspirateur n'est pas autorisée. ")
-        console.log("example :AB123456")
-        cin = prompt("Veuillez saisir un autre CIN : "); 
+        console.log(red + "L'utilisation de l'aspirateur n'est pas autorisée. " + reset);
+        console.log(yellow + "example : AB123456" + reset);
+        cin = prompt(cyan + "Veuillez saisir un autre CIN : " + reset); 
     }
     
  
     let candidat = { 
         cin: cin, 
-        nom: prompt("Veuillez saisir le nom du candidat : "), 
-        prenom: prompt("Veuillez saisir le prénom du candidat : "), 
-        partiPolitique: prompt("Veuillez saisir le parti politique du candidat : "), 
-        age: Number(prompt("Veuillez saisir l'âge du candidat : ")), 
+        nom: prompt(cyan + "Veuillez saisir le nom du candidat : " + reset), 
+        prenom: prompt(cyan + "Veuillez saisir le prénom du candidat : " + reset), 
+        partiPolitique: prompt(cyan + "Veuillez saisir le parti politique du candidat : " + reset), 
+        age: Number(prompt(cyan + "Veuillez saisir l'âge du candidat : " + reset)), 
         electeurs: [] 
     }; 
 
     if (candidat.age < 18) {
-        console.log("Le candidat doit avoir 18 ans ou plus.");
+        console.log(red + "Le candidat doit avoir 18 ans ou plus." + reset);
     
     }
 
    
     candidats.push(candidat); 
-    console.log("Le candidat a été ajouté avec succès. ");
+    console.log(green + "Le candidat a été ajouté avec succès. " + reset);
      
 } 
  
@@ -161,7 +177,7 @@ function verification(cin) {
 
 function ajouterPlusieursCandidats() {
 
-    let n = Number(prompt("Veuillez indiquer le nombre de candidats que vous souhaitez inclure : "));
+    let n = Number(prompt(cyan + "Veuillez indiquer le nombre de candidats que vous souhaitez inclure : " + reset));
 
     for (let i = 0; i < n; i++) {
 
@@ -172,25 +188,25 @@ function ajouterPlusieursCandidats() {
 
 function afficherListeCandidats() {
 
-    console.log("(1)------> Afficher tous les candidats");
-    console.log("(2)------> Trier par nombre de votes");
-    console.log("(3)------> Filtrer par parti politique");
-    console.log("(#)------> retour a  Menu principal........")
+    console.log(cyan + bold + "(1)------> Afficher tous les candidats" + reset);
+    console.log(yellow + "(2)------> Trier par nombre de votes" + reset);
+    console.log(magenta + "(3)------> Filtrer par parti politique" + reset);
+    console.log(red + "(#)------> retour a  Menu principal........" + reset);
 
 
-    let choix = prompt("Votre choix : ");
+    let choix = prompt(blue + "Votre choix : " + reset);
 
     if (choix == "1") {
 
         for (let i = 0; i < candidats.length; i++) {
 
-            console.log("CIN :", candidats[i].cin);
-            console.log("Nom :", candidats[i].nom);
-            console.log("Prénom :", candidats[i].prenom);
-            console.log("Parti politique :", candidats[i].partiPolitique);
-            console.log("Âge :", candidats[i].age);
-            console.log("Nombre de votes :", candidats[i].electeurs.length);
-            console.log("-------------------------");
+            console.log(cyan + "CIN :" + reset, candidats[i].cin);
+            console.log(green + "Nom :" + reset, candidats[i].nom);
+            console.log(green + "Prénom :" + reset, candidats[i].prenom);
+            console.log(magenta + "Parti politique :" + reset, candidats[i].partiPolitique);
+            console.log(yellow + "Âge :" + reset, candidats[i].age);
+            console.log(blue + "Nombre de votes :" + reset, candidats[i].electeurs.length);
+            console.log(cyan + "-------------------------" + reset);
         }
 
     } else if (choix == "2") {
@@ -229,18 +245,18 @@ function afficherListeCandidats() {
 
         for (let i = 0; i < candidatsTries.length; i++) {
 
-            console.log("CIN :", candidatsTries[i].cin);
-            console.log("Nom :", candidatsTries[i].nom);
-            console.log("Prénom :", candidatsTries[i].prenom);
-            console.log("Parti politique :", candidatsTries[i].partiPolitique);
-            console.log("Âge :", candidatsTries[i].age);
-            console.log("Nombre de votes :", candidatsTries[i].electeurs.length);
-            console.log("-------------------------");
+            console.log(cyan + "CIN :" + reset, candidatsTries[i].cin);
+            console.log(green + "Nom :" + reset, candidatsTries[i].nom);
+            console.log(green + "Prénom :" + reset, candidatsTries[i].prenom);
+            console.log(magenta + "Parti politique :" + reset, candidatsTries[i].partiPolitique);
+            console.log(yellow + "Âge :" + reset, candidatsTries[i].age);
+            console.log(blue + "Nombre de votes :" + reset, candidatsTries[i].electeurs.length);
+            console.log(cyan + "-------------------------" + reset);
         }
 
     } else if (choix == "3") {
 
-        let parti = prompt("Veuillez saisir le parti politique : ");
+        let parti = prompt(cyan + "Veuillez saisir le parti politique : " + reset);
 
         let candidatTrouve = false;
 
@@ -253,33 +269,33 @@ function afficherListeCandidats() {
 
                 candidatTrouve = true;
 
-                console.log("CIN :", candidats[i].cin);
-                console.log("Nom :", candidats[i].nom);
-                console.log("Prénom :", candidats[i].prenom);
-                console.log("Parti politique :", candidats[i].partiPolitique);
-                console.log("Âge :", candidats[i].age);
-                console.log("Nombre de votes :", candidats[i].electeurs.length);
-                console.log("-------------------------");
+                console.log(cyan + "CIN :" + reset, candidats[i].cin);
+                console.log(green + "Nom :" + reset, candidats[i].nom);
+                console.log(green + "Prénom :" + reset, candidats[i].prenom);
+                console.log(magenta + "Parti politique :" + reset, candidats[i].partiPolitique);
+                console.log(yellow + "Âge :" + reset, candidats[i].age);
+                console.log(blue + "Nombre de votes :" + reset, candidats[i].electeurs.length);
+                console.log(cyan + "-------------------------" + reset);
             }
         }
 
         if (candidatTrouve == false) {
 
-            console.log("Aucun candidat trouvé pour ce parti.");
+            console.log(red + "Aucun candidat trouvé pour ce parti." + reset);
         }
 
     } else if(choix=="#"){
         main();
     }else {
 
-        console.log("Choix invalide.");
+        console.log(red + "Choix invalide." + reset);
     }
 }
 
 
 function voterPourCandidat() {
 
-    let cinElecteur = prompt("Veuillez saisir votre CIN : ");
+    let cinElecteur = prompt(cyan + "Veuillez saisir votre CIN : " + reset);
 
     let dejaVote = false;
 
@@ -297,12 +313,14 @@ function voterPourCandidat() {
     if (dejaVote == true) {
 
         console.log(
-            "Vous avez déjà voté et vous n'avez pas le droit de modifier votre vote ni de voter à nouveau"
+            red +
+            "Vous avez déjà voté et vous n'avez pas le droit de modifier votre vote ni de voter à nouveau" +
+            reset
         );
 
     } else {
 
-        let cinCandidat = prompt("Veuillez saisir la CIN du candidat : ");
+        let cinCandidat = prompt(cyan + "Veuillez saisir la CIN du candidat : " + reset);
 
         let candidatTrouve = false;
 
@@ -314,13 +332,13 @@ function voterPourCandidat() {
 
                 candidatTrouve = true;
 
-                console.log("Votre vote a été enregistré avec succès.");
+                console.log(green + "Votre vote a été enregistré avec succès." + reset);
             }
         }
 
         if (candidatTrouve == false) {
 
-            console.log("Candidat introuvable.");
+            console.log(red + "Candidat introuvable." + reset);
         }
     }
 }
@@ -328,7 +346,7 @@ function voterPourCandidat() {
 
 function modifierCandidat() {
 
-    let cin = prompt("Entrez la CIN du candidat : ");
+    let cin = prompt(cyan + "Entrez la CIN du candidat : " + reset);
 
     let candidatTrouve = false;
 
@@ -338,35 +356,35 @@ function modifierCandidat() {
 
             candidatTrouve = true;
 
-            console.log("Candidat trouvé :");
+            console.log(green + "Candidat trouvé :" + reset);
             console.log("Nom :", candidats[i].nom);
             console.log("Prénom :", candidats[i].prenom);
             console.log("Parti politique :", candidats[i].partiPolitique);
             console.log("Age :", candidats[i].age);
 
-            console.log("(1)-----> Modifier le parti politique");
-            console.log("(2)-----> Modifier l'âge");
-            console.log("(#)----->retour a  Menu principal.........")
+            console.log(yellow + "(1)-----> Modifier le parti politique" + reset);
+            console.log(yellow + "(2)-----> Modifier l'âge" + reset);
+            console.log(red + "(#)----->retour a  Menu principal........." + reset);
 
-            let choix = prompt("Votre choix : ");
+            let choix = prompt(blue + "Votre choix : " + reset);
 
             if (choix === "1") {
 
-                candidats[i].partiPolitique =prompt("Entrez le nouveau parti politique : ");
+                candidats[i].partiPolitique =prompt(cyan + "Entrez le nouveau parti politique : " + reset);
 
-                console.log("Modification effectuée.");
+                console.log(green + "Modification effectuée." + reset);
 
             } else if (choix === "2") {
 
-                candidats[i].age =Number(prompt("Entrez le nouvel âge : "));
+                candidats[i].age =Number(prompt(cyan + "Entrez le nouvel âge : " + reset));
 
-                console.log("Modification effectuée.");
+                console.log(green + "Modification effectuée." + reset);
             
             }else if(choix === "#"){
                 main();
             } else {
 
-                console.log("Choix invalide.");
+                console.log(red + "Choix invalide." + reset);
             }
 
             break;
@@ -375,14 +393,14 @@ function modifierCandidat() {
 
     if (candidatTrouve === false) {
 
-        console.log("Candidat introuvable.");
+        console.log(red + "Candidat introuvable." + reset);
     }
 }
 
 
 function supprimerCandidat() {
 
-    let cin = prompt("Entrez la CIN du candidat à supprimer : ");
+    let cin = prompt(cyan + "Entrez la CIN du candidat à supprimer : " + reset);
 
     let candidatTrouve = false;
 
@@ -399,7 +417,7 @@ function supprimerCandidat() {
 
             candidatTrouve = true;
 
-            console.log("Candidat supprimé avec succès.");
+            console.log(green + "Candidat supprimé avec succès." + reset);
 
             break;
         }
@@ -407,14 +425,14 @@ function supprimerCandidat() {
 
     if (candidatTrouve === false) {
 
-        console.log("Candidat introuvable.");
+        console.log(red + "Candidat introuvable." + reset);
     }
 }
 
 
 function rechercherCandidat() {
 
-    let nom = prompt("Entrez le nom du candidat : ");
+    let nom = prompt(cyan + "Entrez le nom du candidat : " + reset);
 
     let candidatTrouve = false;
 
@@ -424,12 +442,12 @@ function rechercherCandidat() {
 
             candidatTrouve = true;
 
-            console.log("Nom :", candidats[i].nom);
-            console.log("Prénom :", candidats[i].prenom);
-            console.log("CIN :", candidats[i].cin);
-            console.log("Parti politique :", candidats[i].partiPolitique);
-            console.log("Age :", candidats[i].age);
-            console.log("Nombre de votes :", candidats[i].electeurs.length);
+            console.log(green + "Nom :" + reset, candidats[i].nom);
+            console.log(green + "Prénom :" + reset, candidats[i].prenom);
+            console.log(cyan + "CIN :" + reset, candidats[i].cin);
+            console.log(magenta + "Parti politique :" + reset, candidats[i].partiPolitique);
+            console.log(yellow + "Age :" + reset, candidats[i].age);
+            console.log(blue + "Nombre de votes :" + reset, candidats[i].electeurs.length);
 
             break;
         }
@@ -437,24 +455,29 @@ function rechercherCandidat() {
 
     if (candidatTrouve === false) {
 
-        console.log("Candidat introuvable.");
+        console.log(red + "Candidat introuvable." + reset);
     }
 }
 
 
 function statistiquesElections() {
 
-    console.log("(1)----> Nombre total de candidats");
-    console.log("(2)---->Nombre total de votes");
-    console.log("(3)---->Top 3 candidats");
-    console.log("(4)---->Nombre de candidats par parti");
-    console.log("(#)---->retour a  Menu principal............")
+    console.log(cyan + bold + "(1)----> Nombre total de candidats" + reset);
+    console.log(cyan + "(2)---->Nombre total de votes" + reset);
+    console.log(magenta + "(3)---->Top 3 candidats" + reset);
+    console.log(yellow + "(4)---->Nombre de candidats par parti" + reset);
+    console.log(red + "(#)---->retour a  Menu principal............" + reset);
 
-    let choix = prompt("Votre choix : ");
+    let choix = prompt(blue + "Votre choix : " + reset);
 
     if (choix == "1") {
 
-        console.log("Nombre total de candidats :", candidats.length);
+        console.log(
+            green + 
+            "Nombre total de candidats :" + 
+            reset, 
+            candidats.length
+        );
 
     } else if (choix == "2") {
 
@@ -464,7 +487,12 @@ function statistiquesElections() {
             totalVotes = totalVotes + candidats[i].electeurs.length;
         }
 
-        console.log("Nombre total de votes :", totalVotes);
+        console.log(
+            green + 
+            "Nombre total de votes :" + 
+            reset, 
+            totalVotes
+        );
 
     } else if (choix == "3") {
 
@@ -500,7 +528,7 @@ function statistiquesElections() {
             }
         }
 
-        console.log("Top 3 candidats :");
+        console.log(magenta + bold + "Top 3 candidats :" + reset);
 
         let limite = 3;
 
@@ -512,11 +540,13 @@ function statistiquesElections() {
         for (let i = 0; i < limite; i++) {
 
             console.log(
-                i + 1 + ".",
+                yellow +
+                (i + 1) + "." +
+                reset,
                 candidatsTries[i].nom,
                 candidatsTries[i].prenom,
                 "-",
-                candidatsTries[i].electeurs.length,
+                blue + candidatsTries[i].electeurs.length + reset,
                 "votes"
             );
         }
@@ -548,17 +578,22 @@ function statistiquesElections() {
             }
         }
 
-        console.log("Nombre de candidats par parti :");
+        console.log(cyan + bold + "Nombre de candidats par parti :" + reset);
 
         for (let i = 0; i < partis.length; i++) {
 
-            console.log(partis[i], ":", nombres[i], "candidats");
+            console.log(
+                magenta + partis[i] + reset,
+                ":",
+                green + nombres[i] + reset,
+                "candidats"
+            );
         }
     }else if(choix=="#"){
             main();
     }
      else {
 
-        console.log("Choix invalide.");
+        console.log(red + "Choix invalide." + reset);
     }
 }
