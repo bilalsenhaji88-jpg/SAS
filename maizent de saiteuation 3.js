@@ -12,8 +12,6 @@ console.log(tab)
 while(j==2||j==3||j==4||j==5||j==6||j==7){
         n.push(tab[j]*2);
         j++;
-        
-    
     }
 console.log(n)
 
