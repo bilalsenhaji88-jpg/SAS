@@ -63,7 +63,7 @@ function main(){do {
 9. Quitter
 ========================================`);
 
-    choix = prompt("Votre choix : ");
+    choix = prompt("Votre choix ?: ");
 
     switch (choix) {
 
@@ -120,6 +120,12 @@ function ajouterCandidat() {
         console.log("Le candidat existe déjà."); 
         cin = prompt("Veuillez saisir un autre CIN : "); 
     } 
+    while(cin==""){
+        console.log("L'utilisation de l'aspirateur n'est pas autorisée. ")
+        console.log("example :AB123456")
+        cin = prompt("Veuillez saisir un autre CIN : "); 
+    }
+    
  
     let candidat = { 
         cin: cin, 
@@ -548,8 +554,10 @@ function statistiquesElections() {
 
             console.log(partis[i], ":", nombres[i], "candidats");
         }
-
-    } else {
+    }else if(choix=="#"){
+            main();
+    }
+     else {
 
         console.log("Choix invalide.");
     }
