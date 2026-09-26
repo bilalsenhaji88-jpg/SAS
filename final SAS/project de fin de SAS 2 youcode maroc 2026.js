@@ -30,7 +30,7 @@ let candidats = [
         prenom: "Aziz",
         partiPolitique: "rni",
         age: 65,
-        electeurs: []
+        electeurs: ["h785434","gh452234"]
     },
     {
         cin: "EF345678",
@@ -38,7 +38,7 @@ let candidats = [
         prenom: "Abdelilah",
         partiPolitique: "pjd",
         age: 72,
-        electeurs: []
+        electeurs: ["AM348723","M674563","L658723","p678342"]
     },
     {
         cin: "GH456789",
@@ -294,8 +294,17 @@ function afficherListeCandidats() {
 
 
 function voterPourCandidat() {
+    for (let i = 0; i < candidats.length; i++) {
+        console.log(
+            cyan + "Nom du candidat : " + reset +
+            candidats[i].nom +
+            yellow + " | CIN : " + reset +
+            candidats[i].cin
+        );
+    }
 
     let cinElecteur = prompt(cyan + "Veuillez saisir votre CIN : " + reset);
+    cinElecteur = cinElecteur.trim();
 
     let dejaVote = false;
 
@@ -304,7 +313,6 @@ function voterPourCandidat() {
         for (let j = 0; j < candidats[i].electeurs.length; j++) {
 
             if (candidats[i].electeurs[j] == cinElecteur) {
-
                 dejaVote = true;
             }
         }
@@ -320,7 +328,11 @@ function voterPourCandidat() {
 
     } else {
 
-        let cinCandidat = prompt(cyan + "Veuillez saisir la CIN du candidat : " + reset);
+        let cinCandidat = prompt(
+            cyan + "Veuillez saisir la CIN du candidat : " + reset
+        );
+
+        cinCandidat = cinCandidat.trim();
 
         let candidatTrouve = false;
 
@@ -332,13 +344,19 @@ function voterPourCandidat() {
 
                 candidatTrouve = true;
 
-                console.log(green + "Votre vote a été enregistré avec succès." + reset);
+                console.log(
+                    green + "Votre vote a été enregistré avec succès." + reset
+                );
+
+                break;
             }
         }
 
         if (candidatTrouve == false) {
 
-            console.log(red + "Candidat introuvable." + reset);
+            console.log(
+                red + "Candidat introuvable." + reset
+            );
         }
     }
 }
